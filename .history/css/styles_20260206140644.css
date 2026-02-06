@@ -52,7 +52,7 @@ a:focus-visible, button:focus-visible{
 ========================================================= */
 .demo-badge{
   position: fixed;
-  top: 92px;
+  top: 92px;                 /* ниже fixed nav */
   right: 18px;
   z-index: 1200;
   display: inline-flex;
@@ -262,7 +262,7 @@ nav{
 }
 
 /* =========================================================
-   Services
+   Sections
 ========================================================= */
 .services{
   padding:10rem 4rem;
@@ -297,6 +297,9 @@ nav{
   font-style:italic;
 }
 
+/* =========================================================
+   Services Grid
+========================================================= */
 .services-grid{
   max-width:1400px;
   margin:0 auto;
@@ -305,7 +308,7 @@ nav{
   gap:3rem;
 }
 
-/* card padding = 0 (image full-bleed top) */
+/* IMPORTANT: теперь padding = 0 (картинка сверху full-bleed) */
 .service-card{
   background:var(--color-surface);
   border:1px solid var(--color-border);
@@ -333,10 +336,10 @@ nav{
   box-shadow:0 20px 60px rgba(201,169,97,.1);
 }
 
-/* top image */
+/* TOP IMAGE */
 .service-media{
   position: relative;
-  height: 190px;
+  height: 190px; /* можно 170–230 */
   overflow: hidden;
   border-bottom: 1px solid var(--color-border);
   background: #0b0b0b;
@@ -366,7 +369,7 @@ nav{
   transform: scale(1.08);
 }
 
-/* content padding (everything except image) */
+/* padding for content (everything except image) */
 .service-card > :not(.service-media){
   padding-left: 3rem;
   padding-right: 3rem;
@@ -483,42 +486,36 @@ nav{
   text-transform:uppercase;
 }
 
-/* About image with real photo (webp) */
 .about-image{
   position:relative;
   height:600px;
   overflow:hidden;
   border:1px solid var(--color-border);
-  background:#0b0b0b;
-  box-shadow: 0 30px 90px rgba(0,0,0,.45);
 }
 
-.about-image::after{
+.about-image::before{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(135deg, rgba(201,169,97,.14) 0%, transparent 60%),
-    linear-gradient(to top, rgba(10,10,10,.55), rgba(10,10,10,.08) 55%, transparent);
-  pointer-events:none;
+  background:linear-gradient(135deg, rgba(201,169,97,.2) 0%, transparent 100%);
+  z-index:1;
 }
 
-.about-image img{
+.about-image-placeholder{
   width:100%;
   height:100%;
-  display:block;
-  object-fit:cover;
-  transform: scale(1.02);
-  filter: contrast(1.05) saturate(1.03);
-  transition: transform .9s ease;
-}
-
-.about-image:hover img{
-  transform: scale(1.06);
+  background:
+    linear-gradient(45deg, var(--color-surface) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-surface) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-surface) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-surface) 75%);
+  background-size:20px 20px;
+  background-position:0 0, 0 10px, 10px -10px, -10px 0px;
+  opacity:.1;
 }
 
 /* =========================================================
-   Footer / Contact
+   Footer
 ========================================================= */
 footer{
   background:var(--color-surface);
@@ -585,10 +582,7 @@ footer{
   nav{ padding:1.5rem 2rem; }
   .nav-links{ gap:2rem; }
   .hero h1{ font-size:4rem; }
-
   .about-content{ grid-template-columns:1fr; gap:4rem; }
-  .about-image{ height:420px; }
-
   .services-grid{ grid-template-columns:1fr; }
 }
 
@@ -642,7 +636,7 @@ footer{
     font-size: .98rem;
   }
 
-  /* services image + padding mobile */
+  /* service-media mobile */
   .service-media{ height: 160px; }
   .service-card > :not(.service-media){
     padding-left: 1.6rem;
@@ -650,8 +644,6 @@ footer{
   }
   .service-card > :not(.service-media):first-of-type{ padding-top: 2.0rem; }
   .service-card > :not(.service-media):last-child{ padding-bottom: 2.1rem; }
-
-  .about-image{ height:320px; }
 }
 
 /* Reduced motion */
